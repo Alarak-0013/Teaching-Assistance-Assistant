@@ -88,15 +88,13 @@ onUnmounted(() => {
           </div>
           <div class="feature-item">
             <el-icon class="feature-icon"><Document /></el-icon>
-            <h3>文件支持</h3>
-            <p>支持多种格式文件上传，增强信息输入</p>
-            <p class="note">注意：由于接口限制，后台无法读取到文件内容</p>
+            <h3>教学辅助</h3>
+            <p>支持选课流程，课程大纲，教学任务等多种学习辅助功能</p>
           </div>
           <div class="feature-item">
             <el-icon class="feature-icon"><Setting /></el-icon>
-            <h3>个性化设置</h3>
-            <p>可自定义的对话参数，满足不同场景需求</p>
-            <p class="note" style="color: #3f7af1">支持 deepseek_r1 模型</p>
+            <h3>课程推荐</h3>
+            <p>可为您推荐相关网络课程资源，提供最优质的服务</p>
           </div>
         </div>
         <router-link to="/chat" class="start-button">
