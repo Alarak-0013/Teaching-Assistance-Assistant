@@ -59,7 +59,7 @@ onUnmounted(() => {
   <div class="home-page">
     <header class="header">
       <div class="header-left">
-        <span class="logo-text">LLM Chat</span>
+        <span class="logo-text">智课灵瞳</span>
       </div>
       <div class="header-right">
         <div class="search-container" @click="handleSearchClick">
@@ -69,7 +69,7 @@ onUnmounted(() => {
             <div class="shortcut-key">⌘ K</div>
           </div>
         </div>
-        <a href="https://github.com/Solomon-He/LLM-chat" target="_blank" class="github-link">
+        <a href="https://github.com/Alarak-0013/Teaching-Assistance-Assistant.git" target="_blank" class="github-link">
           <img src="@/assets/photo/github.png" alt="GitHub" class="github-icon" />
         </a>
       </div>
@@ -78,8 +78,8 @@ onUnmounted(() => {
     <!-- 添加主体内容 -->
     <main class="main-content">
       <div class="hero-section">
-        <h1 class="title">欢迎使用 LLM Chat</h1>
-        <p class="description">一个强大的 AI 聊天助手，基于大语言模型，为您提供智能对话体验</p>
+        <h1 class="title">智课灵瞳</h1>
+        <p class="description">教学智能辅助助手，助您轻松掌握课程信息，提升学习效率。</p>
         <div class="features">
           <div class="feature-item">
             <el-icon class="feature-icon"><ChatLineRound /></el-icon>

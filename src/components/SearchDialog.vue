@@ -11,14 +11,14 @@ const isLoading = ref(false)
 const settingStore = useSettingStore()
 
 // 模拟一个初始的 AI 消息
-const aiMessage = 'Hi, 我是你的AI小助手，有什么问题都可以问我！'
+const aiMessage = '欢迎使用智课灵瞳，我可以帮助你查课程、答疑解惑、推荐资源！'
 
 // 模拟建议的提示词
 const suggestedPrompts = [
-  '如何快速上手Vue3框架',
-  '入职字节跳动难吗？',
-  '前端如何实现弹性布局',
-  '喝酒脸红是会喝酒的表现吗？',
+  '线性代数这门课难不难？',
+  '高等数学有什么学习建议？',
+  '推荐一些公开的课程资源平台',
+  '怎么查到下学期课程的开课时间？',
 ]
 
 // 获取消息容器
