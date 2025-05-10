@@ -8,7 +8,7 @@ export const useChatStore = defineStore(
     const conversations = ref([
       {
         id: '1',
-        title: '日常问候',
+        title: '教学辅助',
         messages: [],
         createdAt: Date.now(),
       },
@@ -32,7 +32,7 @@ export const useChatStore = defineStore(
     const createConversation = () => {
       const newConversation = {
         id: Date.now().toString(),
-        title: '日常问候',
+        title: '教学辅助',
         messages: [],
         createdAt: Date.now(),
       }

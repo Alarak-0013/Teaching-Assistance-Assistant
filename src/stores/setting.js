@@ -1,62 +1,48 @@
 import { defineStore } from 'pinia'
 import { ref } from 'vue'
 
-export const useSettingStore = defineStore(
-  'llm-setting',
-  () => {
-    const settings = ref({
-      model: 'deepseek-ai/DeepSeek-R1',
+export const useSettingStore = defineStore('setting', () => {
+  // 多个智能体列表，每个包含：name、agentId、apiKey
+  const agents = ref([
+    {
+      name: '教学助手',
+      agentId: '',
       apiKey: '',
-      stream: true,
-      maxTokens: 4096,
-      temperature: 0.7,
-      topP: 0.7,
-      topK: 50,
-    })
-
-    return {
-      settings,
     }
-  },
-  {
-    persist: true,
-  },
-)
+  ])
 
-export const modelOptions = [
-  {
-    label: 'DeepSeek-R1',
-    value: 'deepseek-ai/DeepSeek-R1',
-    maxTokens: 16384,
-  },
-  {
-    label: 'DeepSeek-V3',
-    value: 'deepseek-ai/DeepSeek-V3',
-    maxTokens: 4096,
-  },
-  {
-    label: 'DeepSeek-V2.5',
-    value: 'deepseek-ai/DeepSeek-V2.5',
-    maxTokens: 4096,
-  },
-  {
-    label: 'Qwen2.5-72B-Instruct-128K',
-    value: 'Qwen/Qwen2.5-72B-Instruct-128K',
-    maxTokens: 4096,
-  },
-  {
-    label: 'QwQ-32B-Preview',
-    value: 'Qwen/QwQ-32B-Preview',
-    maxTokens: 8192,
-  },
-  {
-    label: 'glm-4-9b-chat',
-    value: 'THUDM/glm-4-9b-chat',
-    maxTokens: 4096,
-  },
-  {
-    label: 'glm-4-9b-chat(Pro)',
-    value: 'Pro/THUDM/glm-4-9b-chat',
-    maxTokens: 4096,
-  },
-]
+  // 当前选中的智能体索引
+  const selectedIndex = ref(0)
+
+  // 添加一个新智能体
+  const addAgent = (agent) => {
+    agents.value.push(agent)
+  }
+
+  // 删除智能体
+  const deleteAgent = (index) => {
+    agents.value.splice(index, 1)
+    if (selectedIndex.value >= agents.value.length) {
+      selectedIndex.value = 0
+    }
+  }
+
+  // 选择一个智能体
+  const selectAgent = (index) => {
+    selectedIndex.value = index
+  }
+
+  // 获取当前智能体
+  const currentAgent = () => agents.value[selectedIndex.value]
+
+  return {
+    agents,
+    selectedIndex,
+    addAgent,
+    deleteAgent,
+    selectAgent,
+    currentAgent,
+  }
+}, {
+  persist: true  // 保存在本地缓存中
+})

@@ -12,6 +12,12 @@ import PopupMenu from '@/components/PopupMenu.vue'
 import DialogEdit from '@/components/DialogEdit.vue'
 import { useRouter } from 'vue-router'
 
+
+// 这里新增：
+const agent = computed(() => settingStore.currentAgent())
+const apiKey = computed(() => agent.value.apiKey)
+const agentId = computed(() => agent.value.agentId)
+
 // 获取聊天消息
 const chatStore = useChatStore()
 const currentMessages = computed(() => chatStore.currentMessages)
@@ -57,9 +63,15 @@ const handleSend = async (messageContent) => {
     const lastMessage = chatStore.getLastMessage()
     lastMessage.loading = true
 
+if (!apiKey.value || !agentId.value) {
+  chatStore.updateLastMessage('未配置有效的智能体信息，请前往设置中添加。')
+  return
+}
+
     // 调用API获取回复
     const messages = chatStore.currentMessages.map(({ role, content }) => ({ role, content }))
-    const response = await createChatCompletion(messages)
+   const response = await createChatCompletion(messages, agentId.value, apiKey.value)
+
 
     // 使用封装的响应处理函数
     await messageHandler.handleResponse(
