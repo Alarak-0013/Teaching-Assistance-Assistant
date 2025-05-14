@@ -12,7 +12,7 @@ import PopupMenu from '@/components/PopupMenu.vue'
 import DialogEdit from '@/components/DialogEdit.vue'
 import { useRouter } from 'vue-router'
 
-
+const settingStore = useSettingStore()
 // 这里新增：
 const agent = computed(() => settingStore.currentAgent())
 const apiKey = computed(() => agent.value.apiKey)
@@ -22,7 +22,7 @@ const agentId = computed(() => agent.value.agentId)
 const chatStore = useChatStore()
 const currentMessages = computed(() => chatStore.currentMessages)
 const isLoading = computed(() => chatStore.isLoading)
-const settingStore = useSettingStore()
+//const settingStore = useSettingStore()
 
 // 获取消息容器
 const messagesContainer = ref(null)
@@ -72,15 +72,11 @@ if (!apiKey.value || !agentId.value) {
     const messages = chatStore.currentMessages.map(({ role, content }) => ({ role, content }))
    const response = await createChatCompletion(messages, agentId.value, apiKey.value)
 
+   // 不使用 stream，直接更新消息
+chatStore.updateLastMessage(
+  response.content || '[主控智能体未返回内容]'
+)
 
-    // 使用封装的响应处理函数
-    await messageHandler.handleResponse(
-      response,
-      settingStore.settings.stream,
-      (content, reasoning_content, tokens, speed) => {
-        chatStore.updateLastMessage(content, reasoning_content, tokens, speed)
-      },
-    )
   } catch (error) {
     console.error('Failed to send message:', error)
     chatStore.updateLastMessage('抱歉，发生了一些错误，请稍后重试。')
